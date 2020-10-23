@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Posts!</title>
+{% endblock %}
+
+
+{% block body %}
+
+<!--BODY HEADING-->
+<h1>All Posts</h1>
+
+<!--DESIGNING AN ENTRY FORM FOR THE BLOG POSTS-->
+
+<hr>
+<h2>Create New Blog Post</h2>
+<form action="/posts"   method="POST">
+    Title:<input type="text" name="title" id="title">
+    <br>
+    Post:<input type="text" name="content" id="content">
+    <br>
+    Author:<input type="text" name="author" id="author">
+    <br>
+    <input type="submit" value="POST">
+</form>
+<hr>
+
+<!--READING AND DISPLAYING EACH POST
+IN THE LIST OF DICTS: posts
+(posts is the arg 'post' in render_template() of rout '/posts')
+(That's a lot of 'posts'. So many posts here, it's a four-line bureaucracy :) )
+-->
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    {% if post.author %}
+        <h3>By: {{post.author}}</h3>
+    {% else %}
+        <h3>By: Anon</h3>
+    {% endif %}
+    <p>{{ post.content }}</p>
+{% endfor %}
+
+{% endblock %}
